@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Canciones</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="red darken-4">
+      <div class="nav-wrapper container">
+        <a href="/" class="brand-logo">Lab04</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/admin">Admin</a></li>
+          <li><a href="/songs">Songs</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="container">
+      <h3 class="center-align">Gestión de Canciones</h3>
+
+      <div class="row">
+        <!-- Formulario -->
+        <div class="col s12 m5">
+          <h5>Agregar nueva canción</h5>
+          <% if (typeof error !== "undefined") { %>
+            <div class="card-panel red lighten-4">
+              <span class="red-text"><%= error %></span>
+            </div>
+          <% } %>
+
+          <form action="/songs" method="POST">
+            <div class="input-field">
+              <input id="titulo" type="text" name="titulo" required />
+              <label for="titulo">Título</label>
+            </div>
+            <div class="input-field">
+              <input id="autor" type="text" name="autor" required />
+              <label for="autor">Autor</label>
+            </div>
+            <div class="input-field">
+              <input id="genero" type="text" name="genero" required />
+              <label for="genero">Género</label>
+            </div>
+            <div class="input-field">
+              <input id="album" type="text" name="album" required />
+              <label for="album">Álbum</label>
+            </div>
+            <div class="input-field">
+              <input id="anio" type="number" name="anio" min="1900" max="2100" required />
+              <label for="anio">Año</label>
+            </div>
+            <button type="submit" class="waves-effect waves-light btn red darken-4">
+              Guardar
+            </button>
+          </form>
+        </div>
+
+        <!-- Listado -->
+        <div class="col s12 m7">
+          <h5>Listado de canciones</h5>
+          <% if (songs.length === 0) { %>
+            <p>No hay canciones registradas.</p>
+          <% } else { %>
+            <table class="highlight">
+              <thead>
+                <tr>
+                  <th>Título</th>
+                  <th>Autor</th>
+                  <th>Género</th>
+                  <th>Álbum</th>
+                  <th>Año</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% songs.forEach(song => { %>
+                  <tr>
+                    <td><%= song.titulo %></td>
+                    <td><%= song.autor %></td>
+                    <td><%= song.genero %></td>
+                    <td><%= song.album %></td>
+                    <td><%= song.anio %></td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          <% } %>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
+</html>
